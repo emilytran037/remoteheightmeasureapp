@@ -27,18 +27,20 @@
           <div class="section-heading photos-heading">
             <div>
               <h2 id="photos-title">Photos</h2>
-              <p class="section-subtitle">2 required · up to 2 optional</p>
+              <p class="section-subtitle">2 required · 4 maximum</p>
             </div>
           </div>
 
+          <p class="hint">Photo 1 is the leftmost picture. Place every following photo farther to the right, and enter each photo's increasing distance from Photo 1. Ideally, keep the camera level and with the same orientation/zoom between photos.</p>
+          <p class="point-guidance">For every photo, select the same physical top and bottom points on the object, ideally on one vertical edge. Select the same real locations each time.</p>
           <div id="photo-list" class="photo-list" aria-live="polite"></div>
+          <div id="point-selection-summary" class="point-selection-summary" aria-live="polite"></div>
           <div class="photo-actions">
             <button id="add-photo" class="button button-secondary" type="button">
               <span aria-hidden="true">+</span> Add photo
             </button>
             <span id="photo-count" class="photo-count">2 of 4 photos</span>
           </div>
-          <p class="hint">Enter the horizontal distance from the previous position.</p>
         </section>
 
         <section class="results panel" aria-labelledby="results-title">
@@ -81,7 +83,9 @@
 
     <dialog id="photo-dialog" class="photo-dialog" aria-labelledby="photo-dialog-caption">
       <button id="close-photo-dialog" class="dialog-close" type="button" aria-label="Close photo preview">×</button>
-      <img id="zoomed-photo" alt="">
+      <div id="zoomed-photo-stage" class="zoomed-photo-stage" data-point-stage="">
+        <img id="zoomed-photo" alt="">
+      </div>
       <p id="photo-dialog-caption" class="photo-dialog-caption"></p>
     </dialog>
 

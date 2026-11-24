@@ -215,7 +215,8 @@ h2 {
 .capture-placeholder {
   display: flex;
   width: 100%;
-  min-height: 62px;
+  min-height: 0;
+  aspect-ratio: 4 / 3;
   align-items: center;
   justify-content: center;
   gap: 10px;
@@ -319,8 +320,13 @@ h2 {
   display: flex;
   align-items: center;
   min-height: 32px;
-  color: #68768d;
+  color: #53617a;
   font-size: 12px;
+  font-weight: 600;
+}
+
+.photo-position-info {
+  min-height: 76px;
 }
 
 .photo-actions {
@@ -378,7 +384,7 @@ h2 {
 }
 
 .hint {
-  margin: 8px 0 0;
+  margin: 8px 0 16px;
   color: #78859b;
   font-size: 12px;
 }
@@ -482,35 +488,212 @@ h2 {
   color: var(--danger);
 }
 
-.photo-preview {
+.photo-stage {
   position: relative;
   display: block;
   width: 100%;
-  height: clamp(92px, 14vw, 144px);
+  aspect-ratio: 4 / 3;
   overflow: hidden;
-  padding: 0;
-  border: 0;
   border-radius: 10px;
   background: #edf1f8;
-  cursor: zoom-in;
+  touch-action: none;
 }
 
-.photo-preview img {
+.photo-stage img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .zoom-label {
   position: absolute;
+  z-index: 2;
   right: 7px;
   bottom: 7px;
   padding: 3px 7px;
+  border: 0;
   border-radius: 7px;
   background: rgba(23, 35, 59, 0.75);
   color: #fff;
+  cursor: zoom-in;
   font-size: 10px;
+}
+
+.point-selection {
+  margin-top: 9px;
+  padding: 9px;
+  border: 1px solid #e6eaf1;
+  border-radius: 11px;
+  background: #fff;
+}
+
+.point-selectors {
+  display: grid;
+  gap: 6px;
+}
+
+.point-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.point-selector {
+  display: flex;
+  min-width: 0;
+  min-height: 40px;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 10px;
+  border: 1px solid #dce2ec;
+  border-radius: 9px;
+  background: #fff;
+  color: #53617a;
+  cursor: pointer;
+  font-size: 12px;
+  text-align: left;
+}
+
+.point-selector strong {
+  color: #7b879a;
+  font-size: 11px;
+}
+
+.point-selector-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.point-color-swatch {
+  width: 11px;
+  height: 11px;
+  flex: 0 0 11px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px currentColor;
+}
+
+.point-color-swatch-top {
+  background: #39bd68;
+  color: #238a49;
+}
+
+.point-color-swatch-bottom {
+  background: #4c8cff;
+  color: #285dbf;
+}
+
+.point-selector-top.is-active {
+  border-color: #42a66b;
+  background: #f0faf3;
+  color: #237b45;
+}
+
+.point-selector-bottom.is-active {
+  border-color: #4a80e5;
+  background: #f1f5ff;
+  color: #3156c6;
+}
+
+.point-selector:disabled,
+.delete-point-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.delete-point-button {
+  min-height: 36px;
+  padding: 0 8px;
+  border: 1px solid #e6eaf1;
+  border-radius: 8px;
+  background: #fff;
+  color: #77849a;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.active-point {
+  margin: 8px 0 5px;
+  color: #66748c;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.point-progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: #53617a;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.point-marker {
+  position: absolute;
+  z-index: 1;
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  transform: translate(-50%, -50%);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  touch-action: none;
+}
+
+.point-marker::before {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  content: "";
+}
+
+.point-marker-top {
+  background: #238a49;
+}
+
+.point-marker-top::before {
+  background: #39bd68;
+}
+
+.point-marker-bottom {
+  background: #285dbf;
+}
+
+.point-marker-bottom::before {
+  background: #4c8cff;
+}
+
+.point-selection-summary {
+  margin-top: 10px;
+  padding: 9px 11px;
+  border: 1px solid #dce4f6;
+  border-radius: 10px;
+  background: #f6f8fd;
+  color: #53617a;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.point-selection-summary.is-complete {
+  border-color: #b7dfc4;
+  background: #f0faf3;
+  color: #237b45;
+}
+
+.point-guidance {
+  margin: 0 0 12px;
+  color: #53617a;
+  font-size: 12px;
 }
 
 .photo-controls {
@@ -595,11 +778,23 @@ h2 {
   background: rgba(11, 18, 31, 0.82);
 }
 
-.photo-dialog img {
+.zoomed-photo-stage {
+  position: relative;
+  width: 100%;
+  height: min(65vh, 620px);
+  max-height: calc(100dvh - 130px);
+  min-height: 220px;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.zoomed-photo-stage img {
   display: block;
   width: 100%;
-  max-height: calc(100dvh - 110px);
+  height: 100%;
   object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .dialog-close {
