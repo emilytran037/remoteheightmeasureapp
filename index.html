@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#f5f7fb">
+    <meta name="description" content="A simple workspace for measuring height from multiple photos.">
+    <title>Remote Height Measurement App</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="#" aria-label="Remote Height Measurement App home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M11 4v24M21 4v24M11 8h10M11 13h6M11 18h10M11 23h6" />
+            </svg>
+          </span>
+          <h1 class="brand-name">Remote Height Measurement App</h1>
+        </a>
+      </header>
+
+      <main class="workspace">
+        <section class="photos-section panel" aria-labelledby="photos-title">
+          <div class="section-heading photos-heading">
+            <div>
+              <h2 id="photos-title">Photos</h2>
+              <p class="section-subtitle">2 required · up to 2 optional</p>
+            </div>
+          </div>
+
+          <div id="photo-list" class="photo-list" aria-live="polite"></div>
+          <div class="photo-actions">
+            <button id="add-photo" class="button button-secondary" type="button">
+              <span aria-hidden="true">+</span> Add photo
+            </button>
+            <span id="photo-count" class="photo-count">2 of 4 photos</span>
+          </div>
+          <p class="hint">Enter the horizontal distance from the previous position.</p>
+        </section>
+
+        <section class="results panel" aria-labelledby="results-title">
+          <div class="section-heading">
+            <div>
+              <h2 id="results-title">Results</h2>
+            </div>
+          </div>
+
+          <div class="unit-control">
+            <label for="units">Units</label>
+            <select id="units" name="units">
+              <option value="cm">Centimeters (cm)</option>
+              <option value="in">Inches (in)</option>
+              <option value="mm">Millimeters (mm)</option>
+            </select>
+          </div>
+
+          <div class="result-grid">
+            <div class="estimated-result">
+              <span class="result-label">Estimated height</span>
+              <div class="estimated-value"><span id="estimated-height">—</span><span id="estimated-unit">cm</span></div>
+              <p class="result-note">Awaiting measurement.</p>
+            </div>
+
+            <div class="actual-result">
+              <label for="actual-height">Actual height <span class="optional">(optional)</span></label>
+              <div class="input-with-unit">
+                <input id="actual-height" name="actual-height" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 24">
+                <span id="actual-unit" class="input-unit">cm</span>
+              </div>
+              <p id="error-message" class="validation-message" aria-live="polite">
+                Enter actual height to see error.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="photo-dialog" class="photo-dialog" aria-labelledby="photo-dialog-caption">
+      <button id="close-photo-dialog" class="dialog-close" type="button" aria-label="Close photo preview">×</button>
+      <img id="zoomed-photo" alt="">
+      <p id="photo-dialog-caption" class="photo-dialog-caption"></p>
+    </dialog>
+
+    <div id="notice" class="notice" role="status" aria-live="polite"></div>
+  </body>
+</html>
